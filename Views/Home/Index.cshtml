@@ -1,0 +1,84 @@
+﻿@model CatputStore.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Trang chủ - Catput";
+}
+
+<div class="hero">
+    <div class="container hero-container flex flex-col md:flex-row items-center gap-8">
+        <div class="hero-image w-full md:w-1/2">
+            <img src="~/images/banner.webp" alt="Hero Banner" />
+        </div>
+
+        <div class="hero-text w-full md:w-1/2 text-center md:text-left space-y-4">
+            <h2 class="text-4xl md:text-5xl font-black text-pink-500">CHÀO MỪNG BẠN ĐÃ ĐẾN VỚI CATPUT</h2>
+            <p class="text-gray-600 text-sm md:text-base">
+                Những món quà handmade nhỏ xinh, đáng yêu của CATPUT đang chờ bạn khám phá ♥
+            </p>
+            <div class="hero-buttons flex gap-3 justify-center md:justify-start mt-4">
+                <a href="@Url.Action("Index", "Shop")" class="bg-pink-400 text-white px-6 py-2 rounded-full hover:bg-pink-500 transition">Mua ngay</a>
+                <a href="@Url.Action("Index", "Shop")" class="border border-pink-300 text-pink-500 px-6 py-2 rounded-full hover:bg-pink-50 transition">Xem thêm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<div class="section py-10">
+    <div class="container grid grid-4 gap-4">
+        @foreach (var cat in Model.Categories)
+        {
+            <div class="card p-6 rounded-lg text-center" style="background-color:@cat.Color; color:white;">
+                <h3 class="text-lg font-bold">@cat.Name</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Featured Products Section -->
+<div class="section py-10">
+    <div class="container">
+        <h2 class="text-2xl font-bold mb-6">Sản phẩm nổi bật</h2>
+        <div class="grid-4">
+            @foreach (var p in Model.FeaturedProducts)
+            {
+                <div class="card">
+                    <img src="@Url.Content(p.Image)" alt="@p.Name" />
+                    <h3>@p.Name</h3>
+                    <p>@p.Price.ToString("N0") ₫</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Blog Section -->
+<div class="section py-10" style="background-color:#fdf2f8;">
+    <div class="container">
+        <h2 class="text-2xl font-bold mb-6">Blog mới nhất</h2>
+        <div class="grid grid-3 gap-6">
+            @foreach (var post in Model.BlogPosts)
+            {
+                <div class="card p-4 rounded-lg shadow-md">
+                    <img src="@Url.Content(post.Image)" alt="@post.Title" class="w-full h-48 object-cover rounded-lg mb-2" />
+                    <h3 class="font-bold text-lg">@post.Title</h3>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="section py-10">
+    <div class="container">
+        <h2 class="text-2xl font-bold mb-6">Đánh giá khách hàng</h2>
+        <div class="grid grid-3 gap-6">
+            @foreach (var t in Model.Testimonials)
+            {
+                <div class="card p-4 rounded-lg shadow-md text-center">
+                    <p class="italic text-gray-700">"@t.Content"</p>
+                    <span class="font-bold mt-2 block">@t.Name</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
