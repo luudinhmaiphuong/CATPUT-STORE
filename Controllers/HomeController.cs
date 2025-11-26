@@ -52,5 +52,10 @@ namespace CatputStore.Controllers
 
             return View(model);
         }
+        //Action About
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

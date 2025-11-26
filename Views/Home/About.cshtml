@@ -1,0 +1,229 @@
+﻿@{
+    ViewData["Title"] = "Về chúng tôi";
+}
+
+<div class="container mt-5">
+
+    <!-- TIÊU ĐỀ CHÍNH -->
+    <h1 class="text-center mb-4"
+        style="
+            font-weight:600;
+            text-align:center;
+            font-size:28px;
+            padding-bottom:8px;
+            border-bottom:4px solid #ffd1e6;
+            display:inline-block; <!--để gạch chỉ dài bằng chữ -->
+        ">
+        Về chúng tôi
+    </h1>
+
+
+    <!-- TIÊU ĐỀ PHỤ -->
+    <h2 class="text-center mb-4" style="font-weight:600; color:#ff6fa8;">
+        🌸 Cách mà Catput ra đời
+    </h2>
+
+    <!-- ẢNH BÌA -->
+    <div class="text-center mb-4">
+        <img src="~/images/Banner_Landing Page.webp" 
+             alt="Ảnh bìa Catput"
+             style="max-width: 100%; border-radius: 12px;" />
+    </div>
+
+    <!-- NỘI DUNG GIỚI THIỆU -->
+    <div style="font-size:17px; line-height:1.8; color:#444;">
+        <p>
+            Có những điều nhỏ bé nhưng lại mang trong mình sức mạnh gắn kết, chữa lành và lan tỏa yêu thương. 
+            Đó cũng chính là lý do Catput ra đời – một góc nhỏ dành cho những người yêu thích sự tinh tế 
+            và ấm áp từ đồ handmade.
+        </p>
+
+        <h3 class="mt-4" style="color:#ff6fa8;font-style:italic;">Hành trình bắt đầu</h3>
+        <p>
+            Từ những ngày đầu chỉ là sở thích cá nhân, Catput dần trở thành nơi gửi gắm niềm đam mê sáng tạo.
+            Mỗi sợi len đan, mỗi hạt cườm xâu, mỗi mảnh đất sét được nặn thành hình đều mang trong mình một câu chuyện – 
+            câu chuyện về sự kiên nhẫn, sự tỉ mỉ và tình yêu dành cho cái đẹp.
+        </p>
+
+        <h3 class="mt-4" style="color:#ff6fa8;font-style:italic;">Sản phẩm của Catput</h3>
+        <ul>
+            <li><strong>Crochet:</strong> Những món đồ len nhỏ xinh, ấm áp và độc bản.</li>
+            <li><strong>Vòng tay handmade:</strong> Mỗi chiếc vòng mang dấu ấn riêng, như một lời nhắn nhủ yêu thương.</li>
+            <li><strong>Đất sét nặn:</strong> Những charm, đồ trang trí đáng yêu đầy sức sống.</li>
+        </ul>
+ <!-- LƯỚI 4 ẢNH HÌNH VUÔNG -->
+    <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 26px;
+        max-width: 1100px;
+        margin: 40px auto;
+        text-align: center;
+    ">
+        <!-- ẢNH 1 -->
+        <div style="
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: inline-block;
+        "
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+        >
+            <img src="~/images/cat_lenmem.jpg" alt="Hình 1"
+                 style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+
+        <!-- ẢNH 2 -->
+        <div style="
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: inline-block;
+        "
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+        >
+            <img src="~/images/cat_hatcuom.jpg" alt="Hình 2"
+                 style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+
+        <!-- ẢNH 3 -->
+        <div style="
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: inline-block;
+        "
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+        >
+            <img src="~/images/cat_datmau.jpg" alt="Hình 3"
+                 style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+
+        <!-- ẢNH 4 -->
+        <div style="
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: inline-block;
+        "
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+        >
+            <img src="~/images/cat_made4u.jpg" alt="Hình 4"
+                 style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+
+    </div>
+
+        <h3 class="mt-4" style="color:#ff6fa8;font-style:italic;">Giá trị mà Catput hướng đến</h3>
+        <ul>
+            <li><strong>Chân thành & tỉ mỉ:</strong> Mỗi sản phẩm là tâm huyết làm bằng tay.</li>
+            <li><strong>Sự độc bản:</strong> Không có món nào hoàn toàn giống nhau.</li>
+            <li><strong>Lan tỏa yêu thương:</strong> Handmade là cầu nối giữa người với người.</li>
+        </ul>
+    </div>
+    <div style="height:10px;"></div> <!-- khoảng trống 40px -->
+    <!-- PHẦN GIÁ TRỊ CỐT LÕI -->
+    <div class="mt-5 pt-4">
+
+        <!-- TIÊU ĐỀ -->
+        <h2 class="text-center mb-4" 
+            style="font-weight:600; font-size:19px; color:#ff6fa8; font-style:italic;">
+            Điều CATPUT luôn giữ vững
+        </h2>
+
+        <!-- LƯỚI 4 GIÁ TRỊ -->
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        ">
+            <!-- GIÁ TRỊ 1 -->
+            <div style="
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                padding: 18px;
+                border-radius: 16px;
+            "
+            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+            >
+                <img src="~/images/value_handmade.webp"
+                    alt="Giá trị 1"
+                    style="width:100px; height:100px; object-fit:contain; margin-bottom:12px;" />
+                <p style="font-size:16px; font-weight:600; color:#ff6fa8;">
+                    100% hàng thủ công
+                </p>
+            </div>
+
+            <!-- GIÁ TRỊ 2 -->
+            <div style="
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                padding: 18px;
+                border-radius: 16px;
+            "
+            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+            >
+                <img src="~/images/value_safe.webp"
+                    alt="Giá trị 2"
+                    style="width:100px; height:100px; object-fit:contain; margin-bottom:12px;" />
+                <p style="font-size:16px; font-weight:600; color:#ff6fa8;">
+                    Nguyên liệu an toàn
+                </p>
+            </div>
+
+            <!-- GIÁ TRỊ 3 -->
+            <div style="
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                padding: 18px;
+                border-radius: 16px;
+            "
+            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+            >
+                <img src="~/images/value_service.webp"
+                    alt="Giá trị 3"
+                    style="width:100px; height:100px; object-fit:contain; margin-bottom:12px;" />
+                <p style="font-size:16px; font-weight:600; color:#ff6fa8;">
+                    Tư vấn tận tam
+                </p>
+            </div>
+
+            <!-- GIÁ TRỊ 4 -->
+            <div style="
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                padding: 18px;
+                border-radius: 16px;
+            "
+            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 6px 16px rgba(255, 182, 193, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+            >
+                <img src="~/images/value_policy.webp"
+                    alt="Giá trị 4"
+                    style="width:100px; height:100px; object-fit:contain; margin-bottom:12px;" />
+                <p style="font-size:16px; font-weight:600; color:#ff6fa8;">
+                    Chính sách minh bạch
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- THÔNG ĐIỆP TỪ CATPUT -->
+    <div style="font-size:17px; line-height:1.8; color:#444;">
+        <h3 class="mt-4" style="color:#ff6fa8;font-style:italic;">Thông điệp từ Catput</h3>
+        <blockquote style="font-style:italic; border-left:4px solid #ff6fa8; padding-left:12px;">
+            “Mỗi món đồ handmade đều mang trong mình một câu chuyện, 
+            và chúng tôi muốn kể câu chuyện đó cùng bạn.”
+        </blockquote>
+
+        <p class="mt-3">
+            Nếu bạn đang tìm kiếm một món quà độc đáo, hoặc muốn tự thưởng cho mình một chút ấm áp,
+            hãy để Catput đồng hành cùng bạn trên hành trình nhỏ bé nhưng đầy ý nghĩa này.
+        </p>
+    </div>
+</div>
