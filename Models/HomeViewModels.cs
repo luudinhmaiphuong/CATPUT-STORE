@@ -6,7 +6,7 @@ namespace CatputStore.Models
     public class HomeViewModel
     {
         public List<Category> Categories { get; set; } = new List<Category>();
-        public List<Product> FeaturedProducts { get; set; } = new List<Product>();
+        public List<ProductModels> FeaturedProducts { get; set; } = new List<ProductModels>();
         public List<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();
         public List<Testimonial> Testimonials { get; set; } = new List<Testimonial>();
     }
@@ -17,7 +17,7 @@ namespace CatputStore.Models
         public string Color { get; set; } = "#f472b6";
     }
 
-    public class Product
+    public class ProductModels
     {
         public string Name { get; set; } = string.Empty;
         public string Image { get; set; } = string.Empty;

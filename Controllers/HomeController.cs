@@ -18,12 +18,12 @@ namespace CatputStore.Controllers
             };
 
             // Featured Products
-            var featuredProducts = new List<Product>
+            var featuredProducts = new List<ProductModels>
             {
-                new Product { Name="Bồ hóng", Image="~/images/bohong.png", Price=150000 },
-                new Product { Name="Móc khóa Linh Lan", Image="~/images/linhlan.png", Price=180000 },
-                new Product { Name="Pin Cài Ghibli", Image="~/images/pinghibli.png", Price=200000 },
-                new Product { Name="Dây Đeo", Image="~/images/daydeo.png", Price=50000 },
+                new ProductModels { Name="Bồ hóng", Image="~/images/bohong.png", Price=150000 },
+                new ProductModels { Name="Móc khóa Linh Lan", Image="~/images/linhlan.png", Price=180000 },
+                new ProductModels { Name="Pin Cài Ghibli", Image="~/images/pinghibli.png", Price=200000 },
+                new ProductModels { Name="Dây Đeo", Image="~/images/daydeo.png", Price=50000 },
             };
 
             // Blog posts

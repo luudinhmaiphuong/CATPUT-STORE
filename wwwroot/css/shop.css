@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.shop-title {
+    text-align: center;
+    color: #ff6f91; /* tone h?ng ph?n */
+    margin-top: 20px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+    .filters select, .filters input {
+        padding: 6px 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.product-card {
+    background-color: #fff0f5;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+.img-container {
+    position: relative;
+}
+
+    .img-container img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+
+    .img-container:hover img {
+        transform: scale(1.05);
+    }
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,111,145,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.img-container:hover .overlay {
+    opacity: 1;
+}
+
+.overlay button {
+    background-color: #ff1493;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .overlay button:hover {
+        background-color: #ff6f91;
+    }
+
+.product-card h3 {
+    margin: 8px 0 4px;
+    color: #ff1493;
+}
+
+.product-card .category {
+    color: #ff85a0;
+    font-size: 0.9rem;
+}
+
+.product-card .price {
+    color: #ff3b6f;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.rating .star {
+    color: #ffc0cb;
+    font-size: 16px;
+}
+
+    .rating .star.filled {
+        color: #ff1493;
+    }
