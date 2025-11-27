@@ -18,6 +18,7 @@ namespace CatputStore.Controllers
                 OldPrice = 69000,
                 Rating = 5,
                 ImageUrl = "/images/bohongdoithung.png",
+                Description = "Bồ hóng đội thúng len handmade – dễ thương, tinh nghịch, phụ kiện độc đáo.",
             },
             new ProductModel {
                 Id = 5,
@@ -135,6 +136,7 @@ namespace CatputStore.Controllers
                 OldPrice = 55000,
                 Rating = 5,
                 ImageUrl = "/images/bohong.png",
+                Description = "Bồ hóng ngồi xích đu len handmade – tinh nghịch, độc đáo, phụ kiện dễ thương.",
             },
             new ProductModel {
                 Id = 15,
