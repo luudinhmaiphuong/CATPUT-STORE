@@ -193,7 +193,7 @@
                     <a href="@Url.Action("Profile", "User")" class="icon-item">
                         <img src="~/images/user.png" alt="User" />
                     </a>
-                    <a href="@Url.Action("Cart", "Shop")" class="icon-item">
+                    <a href="@Url.Action("Index", "Cart")" class="icon-item">
                         <img src="~/images/cart1.png" alt="Cart" />
                     </a>
                 </div>
@@ -255,6 +255,20 @@
             </div>
         </div>
     </footer>
-
+    @RenderSection("Scripts", required: false);
+    @RenderSection("Antiforgery", required: false)
+    <script>
+        // Tự động cập nhật số lượng giỏ hàng khi trang load (mọi trang)
+        $(function () {
+            $.get('/Cart/GetCartCount', function (data) {
+                const badge = $('#cartCountBadge');
+                if (data.count > 0) {
+                    badge.text(data.count).show();
+                } else {
+                    badge.hide();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

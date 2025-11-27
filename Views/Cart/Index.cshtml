@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng Catput</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ===========================
+                   RESET & FONT
+                =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .cart-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ff6fa8;
+        }
+
+        .cart-grid {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .cart-table {
+            flex: 1;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .cart-table thead th {
+                font-weight: 600;
+                color: #666;
+                padding-bottom: 12px;
+                text-align: left;
+            }
+
+        /* --- SỬA Ở ĐÂY: GIÃN KHOẢNG CÁCH HÀNG DỌC --- */
+        .cart-item {
+            border-bottom: 1px solid #f3f3f3;
+        }
+
+            .cart-item td {
+                vertical-align: middle;
+                padding: 40px 0; /* Tăng lên 40px cho thoáng hẳn */
+            }
+
+            .cart-item img {
+                width: 110px;
+                height: 110px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+        .remove-btn {
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffe5ef;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: .2s;
+            color: #ff6fa8;
+            font-size: 14px;
+        }
+
+            .remove-btn:hover {
+                background: #ff6fa8;
+                color: white;
+            }
+
+        .cart-price {
+            font-weight: 600;
+            color: #222;
+        }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            width: 90px;
+            border-radius: 6px;
+        }
+
+            .qty-box button {
+                width: 30px;
+                height: 32px;
+                border: none;
+                background: white;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            .qty-box input {
+                width: 30px;
+                text-align: center;
+                border: none;
+                font-size: 15px;
+            }
+
+        .cart-summary {
+            padding: 25px;
+            background: #fff6fa; /* Hoặc màu trắng #fff tuỳ ý thích */
+            border-radius: 16px;
+            width: 100%;
+            max-width: 360px;
+            flex-shrink: 0;
+            border: 1px solid #ffeef5; /* Thêm viền nhẹ cho đẹp */
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .summary-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6fa8;
+        }
+
+        .checkout-btn {
+            margin-top: 18px;
+            width: 100%;
+            padding: 14px 0;
+            background: #ff6fa8;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 17px;
+            cursor: pointer;
+            border: none;
+            transition: .2s;
+        }
+
+            .checkout-btn:hover {
+                background: #ff84b6;
+            }
+
+        /* --- CSS CHO PHẦN MÃ ƯU ĐÃI (MỚI) --- */
+        .coupon-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .coupon-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        .coupon-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .coupon-apply-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+            .coupon-apply-btn:hover {
+                background-color: #eee;
+                color: #333;
+            }
+
+        /* Nút quay lại */
+        .btn-secondary {
+            background: #fff;
+            border: 2px solid #ffd1e6;
+            padding: 10px 16px;
+            border-radius: 10px;
+            color: #ff6fa8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+            .btn-secondary:hover {
+                background: #ffe6f2;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="cart-container">
+
+        <h2 class="cart-title">Giỏ hàng</h2>
+
+        <div class="cart-grid">
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>SẢN PHẨM</th>
+                        <th>GIÁ</th>
+                        <th>SỐ LƯỢNG</th>
+                        <th>TẠM TÍNH</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <tr class="cart-item" data-id="1">
+                        <td style="display:flex; align-items:center; gap:10px;">
+                            <div class="remove-btn">×</div>
+                            <img src="~/images/17.webp" alt="Bó Hoa Mini Pastel" />
+                            <span>Bó Hoa Mini Màu Pastel Xinh Xắn</span>
+                        </td>
+                        <td class="cart-price" data-price="59000">59.000 ₫</td>
+                        <td>
+                            <div class="qty-box">
+                                <button class="minus">-</button>
+                                <input type="text" class="qty-input" value="1" />
+                                <button class="plus">+</button>
+                            </div>
+                        </td>
+                        <td class="cart-price subtotal">59.000 ₫</td>
+                    </tr>
+
+                    <tr class="cart-item" data-id="2">
+                        <td style="display:flex; align-items:center; gap:10px;">
+                            <div class="remove-btn">×</div>
+                            <img src="~/images/deepblue.png" alt="Vòng Tay Handmade" />
+                            <span>Vòng Tay Handmade Xinh Xắn</span>
+                        </td>
+                        <td class="cart-price" data-price="89000">89.000 ₫</td>
+                        <td>
+                            <div class="qty-box">
+                                <button class="minus">-</button>
+                                <input type="text" class="qty-input" value="1" />
+                                <button class="plus">+</button>
+                            </div>
+                        </td>
+                        <td class="cart-price subtotal">89.000 ₫</td>
+                    </tr>
+
+                    <tr class="cart-item" data-id="3">
+                        <td style="display:flex; align-items:center; gap:10px;">
+                            <div class="remove-btn">×</div>
+                            <img src="~/images/daydeo.png" alt="Đất sét nặn" />
+                            <span>Đất Sét Nặn Hình Dễ Thương</span>
+                        </td>
+                        <td class="cart-price" data-price="49000">49.000 ₫</td>
+                        <td>
+                            <div class="qty-box">
+                                <button class="minus">-</button>
+                                <input type="text" class="qty-input" value="2" />
+                                <button class="plus">+</button>
+                            </div>
+                        </td>
+                        <td class="cart-price subtotal">98.000 ₫</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <h3 style="margin-bottom: 20px; font-size: 18px; color: #444; text-transform: uppercase;">Tổng cộng giỏ hàng</h3>
+
+                <div class="summary-row">
+                    <span>Tạm tính</span>
+                    <span id="subtotal">246.000 ₫</span>
+                </div>
+                <div class="summary-row">
+                    <span>Vận chuyển</span>
+                    <span id="shipping">32.400 ₫</span>
+                </div>
+                <hr style="border:0; border-top:1px solid #ffd1e6; margin:14px 0;">
+                <div class="summary-row summary-total">
+                    <span>Tổng</span>
+                    <span id="total">278.400 ₫</span>
+                </div>
+
+                <button class="checkout-btn">TIẾN HÀNH THANH TOÁN</button>
+
+                <div class="coupon-section">
+                    <div class="coupon-label">
+                        <i class="fas fa-tag" style="color: #999;"></i> Mã ưu đãi
+                    </div>
+                    <input type="text" class="coupon-input" placeholder="Nhập mã giảm giá">
+                    <button class="coupon-apply-btn">Áp dụng</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top:25px; text-align:center;">
+            <button class="btn-secondary">← TIẾP TỤC XEM SẢN PHẨM</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Cập nhật subtotal và total
+        function updateTotals() {
+            let subtotal = 0;
+            document.querySelectorAll('.cart-item').forEach(row => {
+                let price = parseInt(row.querySelector('.cart-price').dataset.price);
+                let qty = parseInt(row.querySelector('.qty-input').value);
+                let sub = price * qty;
+                row.querySelector('.subtotal').innerText = sub.toLocaleString('vi-VN') + ' ₫';
+                subtotal += sub;
+            });
+            document.getElementById('subtotal').innerText = subtotal.toLocaleString('vi-VN') + ' ₫';
+            let shipping = 32400;
+            document.getElementById('total').innerText = (subtotal + shipping).toLocaleString('vi-VN') + ' ₫';
+        }
+
+        // Tăng/giảm số lượng
+        document.querySelectorAll(".plus").forEach(btn => {
+            btn.onclick = () => {
+                let inp = btn.closest('.qty-box').querySelector('.qty-input');
+                inp.value = parseInt(inp.value) + 1;
+                updateTotals();
+            };
+        });
+
+        document.querySelectorAll(".minus").forEach(btn => {
+            btn.onclick = () => {
+                let inp = btn.closest('.qty-box').querySelector('.qty-input');
+                if(parseInt(inp.value) > 1) inp.value = parseInt(inp.value) - 1;
+                updateTotals();
+            };
+        });
+
+        // Xóa sản phẩm
+        document.querySelectorAll(".remove-btn").forEach(btn => {
+            btn.onclick = () => {
+                let row = btn.closest('.cart-item');
+                row.remove();
+                updateTotals();
+            };
+        });
+
+        // Khởi tạo totals
+        updateTotals();
+    </script>
+
+</body>
+</html>
