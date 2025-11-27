@@ -305,30 +305,33 @@
 
                 @foreach (var p in Model.Products)
                 {
-                    <div class="product-card">
-                        <img src="@p.ImageUrl" alt="@p.Name" />
+                    <a asp-controller="Shop" asp-action="Detail" asp-route-id="@p.Id" style="text-decoration:none; color:inherit;">
+                        <div class="product-card">
+                            <img src="@p.ImageUrl" alt="@p.Name" />
 
-                        <div style="padding:10px 5px;">
-                            <div style="color:#f783b4; font-size:14px;">@p.Category</div>
+                            <div style="padding:10px 5px;">
+                                <div style="color:#f783b4; font-size:14px;">@p.Category</div>
 
-                            <h4 class="product-name" style="margin:5px 0;">@p.Name</h4>
+                                <h4 class="product-name" style="margin:5px 0;">@p.Name</h4>
 
-                            <div class="stars" style="margin-bottom:5px;">
-                                @for (int i = 0; i < p.Rating; i++)
-                                {
-                                    <span>★</span>
-                                }
+                                <div class="stars" style="margin-bottom:5px;">
+                                    @for (int i = 0; i < p.Rating; i++)
+                                    {
+                                        <span>★</span>
+                                    }
+                                </div>
+
+                                <div style="margin-bottom:10px;">
+                                    <span style="text-decoration:line-through; color:#999;">@p.OldPrice đ</span>
+                                    <span style="font-weight:bold; margin-left:5px;">@p.Price đ</span>
+                                </div>
+
+                                <button class="btn-add">Thêm vào giỏ hàng</button>
                             </div>
-
-                            <div style="margin-bottom:10px;">
-                                <span style="text-decoration:line-through; color:#999;">@p.OldPrice đ</span>
-                                <span style="font-weight:bold; margin-left:5px;">@p.Price đ</span>
-                            </div>
-
-                            <button class="btn-add">Thêm vào giỏ hàng</button>
                         </div>
-                    </div>
+                    </a>
                 }
+
 
             </div>
 

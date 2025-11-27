@@ -1,0 +1,39 @@
+﻿@using CatputStore.Models
+@model ProductModel
+
+<div class="detail-container" style="display:flex;gap:40px;padding:40px;max-width:1100px;margin:0 auto;">
+
+    <div class="image-box" style="flex:1;">
+        <img src="@Model.ImageUrl" alt="@Model.Name" style="width:100%;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+
+    <div class="info-box" style="flex:1;">
+        <h1 style="font-size:28px;font-weight:700;">@Model.Name</h1>
+
+        <div style="margin:15px 0;">
+            <span style="font-size:24px;color:#e63946;font-weight:700;">
+                @Model.Price.ToString("N0")đ
+            </span>
+            <span style="text-decoration:line-through;margin-left:10px;color:#777;">
+                @Model.OldPrice.ToString("N0")đ
+            </span>
+        </div>
+
+        <p style="margin:10px 0;font-size:16px;color:#333;">
+            Danh mục:
+            <strong>@Model.Category</strong>
+        </p>
+
+        <p style="margin:10px 0;font-size:18px;color:#f4a261;">
+            ⭐ @Model.Rating 
+        </p>
+
+        <p style="margin:20px 0;font-size:15px;line-height:1.6;color:#444;">
+            Bồ hóng ngồi xích đu len handmade – tinh nghịch, độc đáo, phụ kiện dễ thương.
+        </p>
+
+        <a href="/shop" style="display:inline-block;padding:10px 18px;background:#FF7CA8;color:#fff;border-radius:8px;text-decoration:none;margin-top:20px;">
+            ← Quay lại cửa hàng
+        </a>
+    </div>
+</div>

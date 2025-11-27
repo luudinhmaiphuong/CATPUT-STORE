@@ -202,5 +202,19 @@ namespace CatputStore.Controllers
 
             return View(vm);
         }
+        // Trang chi tiết sản phẩm
+        public IActionResult Detail(int id)
+        {
+            // Tìm sản phẩm theo id
+            var product = products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound(); // Trả lỗi nếu không có sản phẩm này
+            }
+
+            // Gửi dữ liệu sản phẩm qua View
+            return View(product);
+        }
     }
 }

@@ -9,5 +9,8 @@
         public int OldPrice { get; set; }
         public double Rating { get; set; }
         public string ImageUrl { get; set; }
+
+        // mô tả chi tiết
+        public string Description { get; set; }
     }
 }
