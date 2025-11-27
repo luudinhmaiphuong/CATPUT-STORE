@@ -21,7 +21,7 @@
         /* Navbar */
         .navbar {
             width: 100%;
-            background: #fdf2f8;
+            background: #ffffff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
@@ -43,30 +43,29 @@
 
         .main-menu a {
             margin: 0 12px;
-            font-size: 16px;
+            font-size: 18px;
             color: #4b5563;
             font-weight: 600;
         }
 
             .main-menu a:hover {
-                color: #ec4899;
+                color: #f16480;
             }
 
         .icons {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
         .icon-item img {
             width: 26px;
             height: 26px;
-            filter: brightness(0.4);
             transition: 0.2s;
         }
 
         .icon-item:hover img {
-            filter: brightness(1);
+            filter: brightness(0.3);
         }
 
         /* Footer */
@@ -191,11 +190,11 @@
 
                 <!-- Icons -->
                 <div class="icons">
-                    <a href="@Url.Action("Cart", "Shop")" class="icon-item">
-                        <img src="~/images/cart.png" alt="Cart" />
-                    </a>
                     <a href="@Url.Action("Profile", "User")" class="icon-item">
-                        <img src="~/images/profile.png" alt="User" />
+                        <img src="~/images/user.png" alt="User" />
+                    </a>
+                    <a href="@Url.Action("Cart", "Shop")" class="icon-item">
+                        <img src="~/images/cart1.png" alt="Cart" />
                     </a>
                 </div>
             </div>
