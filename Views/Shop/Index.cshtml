@@ -160,6 +160,9 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         transition: transform 0.25s ease, box-shadow 0.25s ease;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* nội dung trên + nút đáy */
     }
 
     .product-card:hover {
@@ -181,6 +184,11 @@
         color: #525252;
         font-weight: 550;
         transition: color 0.2s ease;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* hiển thị tối đa 2 dòng */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 46px; /* chiều cao tương ứng 2 dòng chữ */
     }
 
     .product-name:hover {
