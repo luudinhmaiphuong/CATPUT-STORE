@@ -7,7 +7,7 @@ namespace CatputStore.Controllers
 {
     public class ShopController : Controller
     {
-        // <- Di chuyển products lên cấp lớp để các action khác cùng truy cập được
+        // Danh sách sản phẩm mock data
         private readonly List<ProductModel> products = new List<ProductModel>
         {
             new ProductModel {
@@ -18,7 +18,13 @@ namespace CatputStore.Controllers
                 OldPrice = 69000,
                 Rating = 5,
                 ImageUrl = "/images/bohongdoithung.png",
-                Description = "Bồ hóng đội thúng len handmade – dễ thương, tinh nghịch, phụ kiện độc đáo.",
+                ShortDescription = "Bồ hóng đội thúng len handmade – dễ thương, tinh nghịch, phụ kiện độc đáo.",
+                Description = "Thêm vào bộ sưu tập Ghibli của bạn bồ hóng đội thúng len handmade." +
+                              "\r\n\r\nThiết kế độc đáo: Bồ hóng được móc len thủ công tạo hình tròn xinh xắn, đội chiếc thúng len nhỏ trên đầu, vừa ngộ nghĩnh vừa đáng yêu." +
+                              "\r\n\r\nChất liệu mềm mại: Len cotton cao cấp, an toàn và bền đẹp, có thể trưng bày lâu dài." +
+                              "\r\n\r\nỨng dụng linh hoạt: Dùng làm trang trí bàn học, góc làm việc hoặc treo balo, túi xách." +
+                              "\r\n\r\nQuà tặng đáng yêu: Lý tưởng dành cho fan Ghibli hoặc những ai yêu thích đồ decor handmade bằng len." +
+                              "\r\n\r\nMột sản phẩm nhỏ xinh nhưng đủ để mang lại sự vui tươi và độc đáo cho không gian của bạn.",
             },
             new ProductModel {
                 Id = 5,
@@ -204,10 +210,11 @@ namespace CatputStore.Controllers
 
             return View(vm);
         }
+
         // Trang chi tiết sản phẩm
         public IActionResult Detail(int id)
         {
-            // Tìm sản phẩm theo id
+            // 1. Tìm sản phẩm chính
             var product = products.FirstOrDefault(p => p.Id == id);
 
             if (product == null)
@@ -215,8 +222,23 @@ namespace CatputStore.Controllers
                 return NotFound(); // Trả lỗi nếu không có sản phẩm này
             }
 
-            // Gửi dữ liệu sản phẩm qua View
-            return View(product);
+            // 2. Tìm các sản phẩm liên quan (Related Products)
+            // Lọc sản phẩm cùng Category và không phải sản phẩm hiện tại, lấy tối đa 4
+            var relatedProducts = products
+                                    .Where(p => p.Category == product.Category && p.Id != id)
+                                    .Take(4)
+                                    .ToList();
+
+            // 3. Đóng gói dữ liệu vào ViewModel
+            var viewModel = new ProductDetailViewModel
+            {
+                Product = product,
+                RelatedProducts = relatedProducts
+                // Bạn có thể thêm các thuộc tính khác như Variants, Quantity nếu cần
+            };
+
+            // 4. Gửi ViewModel chứa cả sản phẩm chính và sản phẩm liên quan qua View
+            return View(viewModel);
         }
     }
 }
