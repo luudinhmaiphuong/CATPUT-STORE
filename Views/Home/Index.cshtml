@@ -3,6 +3,99 @@
     ViewData["Title"] = "Trang chủ - Catput";
 }
 
+<style>
+    /* --- CSS CHO NÚT HERO --- */
+    .hero-buttons {
+        display: flex;
+        gap: 15px; /* Khoảng cách giữa 2 nút */
+    }
+
+    .btn-hero {
+        padding: 10px 30px;
+        border-radius: 50px; /* Bo tròn hình viên thuốc */
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        border: 2px solid transparent;
+    }
+
+    /* Nút Mua ngay: Màu hồng nền */
+    .btn-hero-primary {
+        background-color: #f16480;
+        color: white;
+        border-color: #f16480;
+        box-shadow: 0 4px 10px rgba(244, 114, 182, 0.4);
+    }
+
+        .btn-hero-primary:hover {
+            background-color: #f16480;
+            border-color: #f16480;
+            transform: translateY(-3px);
+            color: white;
+        }
+
+    /* Nút Xem thêm: Nền trắng viền hồng */
+    .btn-hero-outline {
+        background-color: white;
+        color: #f16480;
+        border-color: #f16480;
+    }
+
+        .btn-hero-outline:hover {
+            background-color: #fdf2f8;
+            color: #db2777;
+            border-color: #db2777;
+            transform: translateY(-3px);
+        }
+
+    /* --- CSS DANH MỤC --- */
+    .cate-section-wrapper {
+        padding: 40px 0;
+        width: 100%;
+    }
+
+    .cate-grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .cate-item {
+        display: block;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+    }
+
+        .cate-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .cate-item img {
+            width: 100%;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+    /* Responsive mobile */
+    @@media (max-width: 768px) {
+        .cate-grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+    }
+</style>
+
 <div class="hero">
     <div class="container hero-container flex flex-col md:flex-row items-center gap-8">
         <div class="hero-image w-full md:w-1/2">
@@ -14,69 +107,79 @@
             <p class="text-gray-600 text-sm md:text-base">
                 Những món quà handmade nhỏ xinh, đáng yêu của CATPUT đang chờ bạn khám phá ♥
             </p>
-            <div class="hero-buttons flex gap-3 justify-center md:justify-start mt-4">
-                <a href="@Url.Action("Index", "Shop")" class="bg-pink-400 text-white px-6 py-2 rounded-full hover:bg-pink-500 transition">Mua ngay</a>
-                <a href="@Url.Action("Index", "Shop")" class="border border-pink-300 text-pink-500 px-6 py-2 rounded-full hover:bg-pink-50 transition">Xem thêm</a>
+
+            <div class="hero-buttons justify-center md:justify-start mt-6">
+                <a href="@Url.Action("Index", "Shop")" class="btn-hero btn-hero-primary">Mua ngay</a>
+                <a href="@Url.Action("Index", "Shop")" class="btn-hero btn-hero-outline">Xem thêm</a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Categories Section -->
-<div class="section py-10">
-    <div class="container grid grid-4 gap-4">
+<div class="cate-section-wrapper">
+    <div class="cate-grid-container">
         @foreach (var cat in Model.Categories)
         {
-            <div class="card p-6 rounded-lg text-center" style="background-color:@cat.Color; color:white;">
-                <h3 class="text-lg font-bold">@cat.Name</h3>
-            </div>
+            // Logic chọn ảnh (bạn nhớ lưu ảnh đúng tên trong folder images)
+            string imgName = "default.webp";
+            string nameLower = cat.Name.ToLower();
+
+            // Lưu ý: Tên file ảnh phải khớp chính xác với file bạn lưu trong wwwroot/images
+            if (nameLower.Contains("len")) { imgName = "Danh Mục_Len Mềm.webp"; }
+            else if (nameLower.Contains("đất") || nameLower.Contains("dat")) { imgName = "Danh Mục_Đất Màu.webp"; }
+            else if (nameLower.Contains("cườm") || nameLower.Contains("cuom")) { imgName = "Danh Mục_Hạt Cườm.webp"; }
+            else if (nameLower.Contains("make") || nameLower.Contains("4u")) { imgName = "Danh Mục_Made4U.webp"; }
+
+            // ĐÃ SỬA: Link truyền tham số categories sang ShopController
+            <a href="@Url.Action("Index", "Shop", new { categories = cat.Name })" class="cate-item" title="Xem sản phẩm @cat.Name">
+                <img src="~/images/@imgName" alt="@cat.Name" />
+            </a>
         }
     </div>
 </div>
 
-<!-- Featured Products Section -->
 <div class="section py-10">
     <div class="container">
         <h2 class="text-2xl font-bold mb-6">Sản phẩm nổi bật</h2>
-        <div class="grid-4">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
             @foreach (var p in Model.FeaturedProducts)
             {
-                <div class="card">
-                    <img src="@Url.Content(p.Image)" alt="@p.Name" />
-                    <h3>@p.Name</h3>
-                    <p>@p.Price.ToString("N0") ₫</p>
+                <div class="card p-2 rounded-lg hover:shadow-lg transition bg-white border border-gray-100">
+                    <img src="@Url.Content(p.Image)" alt="@p.Name" style="width:100%; height:200px; object-fit:cover; border-radius:8px;" />
+                    <div style="padding: 10px;">
+                        <h3 class="font-bold text-gray-800" style="margin: 5px 0;">@p.Name</h3>
+                        <p class="text-pink-500 font-bold">@p.Price.ToString("N0") ₫</p>
+                    </div>
                 </div>
             }
         </div>
     </div>
 </div>
 
-<!-- Blog Section -->
 <div class="section py-10" style="background-color:#fdf2f8;">
     <div class="container">
         <h2 class="text-2xl font-bold mb-6">Blog mới nhất</h2>
-        <div class="grid grid-3 gap-6">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
             @foreach (var post in Model.BlogPosts)
             {
-                <div class="card p-4 rounded-lg shadow-md">
-                    <img src="@Url.Content(post.Image)" alt="@post.Title" class="w-full h-48 object-cover rounded-lg mb-2" />
-                    <h3 class="font-bold text-lg">@post.Title</h3>
+                <div class="card p-4 rounded-lg shadow-md bg-white">
+                    <img src="@Url.Content(post.Image)" alt="@post.Title" style="width:100%; height:180px; object-fit:cover; border-radius:8px;" />
+                    <h3 class="font-bold text-lg mt-2">@post.Title</h3>
                 </div>
             }
         </div>
     </div>
 </div>
 
-<!-- Testimonials Section -->
 <div class="section py-10">
     <div class="container">
         <h2 class="text-2xl font-bold mb-6">Đánh giá khách hàng</h2>
-        <div class="grid grid-3 gap-6">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
             @foreach (var t in Model.Testimonials)
             {
-                <div class="card p-4 rounded-lg shadow-md text-center">
+                <div class="card p-4 rounded-lg shadow-md text-center bg-white">
                     <p class="italic text-gray-700">"@t.Content"</p>
-                    <span class="font-bold mt-2 block">@t.Name</span>
+                    <span class="font-bold mt-2 block text-pink-500">@t.Name</span>
                 </div>
             }
         </div>

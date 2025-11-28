@@ -2,6 +2,7 @@
 using CatputStore.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace CatputStore.Controllers
 {
@@ -185,28 +186,41 @@ namespace CatputStore.Controllers
         // Một action Index duy nhất nhận các filter từ querystring/form
         public IActionResult Index(List<string>? categories, int priceRange = 200000, int? rating = null)
         {
-            // Lọc dữ liệu dựa trên field products
+            // 1. Lọc sản phẩm
             var filtered = products.Where(p =>
-                (categories == null || categories.Count == 0 || categories.Contains(p.Category)) &&
+                (categories == null || categories.Count == 0 || categories.Any(c => c.Equals(p.Category, StringComparison.OrdinalIgnoreCase))) &&
+
                 p.Price <= priceRange &&
                 (rating == null || p.Rating >= rating)
             ).ToList();
 
-            // Danh sách danh mục dùng cho sidebar
+            // 2. Lấy danh sách tất cả danh mục để hiện ra Sidebar
             var allCategories = products.Select(p => p.Category).Distinct().ToList();
 
-            // Tạo ViewModel
+            // 3. Xử lý để Checkbox bên trang Shop tự động tích đúng
+            var selectedCatsNormalized = new List<string>();
+            if (categories != null)
+            {
+                foreach (var cat in categories)
+                {
+                    // Tìm tên chuẩn trong database khớp với tên user gửi lên
+                    var match = allCategories.FirstOrDefault(c => c.Equals(cat, StringComparison.OrdinalIgnoreCase));
+                    if (match != null)
+                    {
+                        selectedCatsNormalized.Add(match);
+                    }
+                }
+            }
+
+            // 4. Đẩy dữ liệu ra View
             var vm = new ShopViewModel
             {
                 Products = filtered,
                 Categories = allCategories,
-                SelectedCategories = categories ?? new List<string>(),
+                SelectedCategories = selectedCatsNormalized, // Dùng list đã chuẩn hóa
                 PriceRange = priceRange,
                 SelectedRating = rating
             };
-
-            //Có thể dùng ViewBag nếu muốn:
-            ViewBag.Categories = allCategories;
 
             return View(vm);
         }

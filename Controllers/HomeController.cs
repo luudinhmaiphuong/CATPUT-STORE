@@ -14,7 +14,7 @@ namespace CatputStore.Controllers
                 new Category { Name="Len mềm", Color="#f472b6" },
                 new Category { Name="Đất màu", Color="#fbbf24" },
                 new Category { Name="Hạt cườm", Color="#60a5fa" },
-                new Category { Name="Make4U", Color="#34d399" }
+                new Category { Name="Made4U", Color="#34d399" }
             };
 
             // Featured Products
