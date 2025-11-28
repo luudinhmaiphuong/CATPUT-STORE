@@ -1,0 +1,271 @@
+﻿@model CatputStore.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<!-- 1. IMPORT FONT CHỮ TRÒN TRỊA (QUICKSAND) -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    /* === TỔNG THỂ === */
+    .auth-container {
+        font-family: 'Quicksand', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #fff6fa; /* Nền hồng nhạt */
+        padding: 40px 20px;
+    }
+
+    /* === KHUNG THẺ (CARD) === */
+    .auth-card {
+        width: 900px; /* Độ rộng thoải mái */
+        max-width: 100%;
+        background: white;
+        border-radius: 24px;
+        padding: 60px 80px; /* Padding lớn để nội dung lọt vào giữa sang trọng */
+        box-shadow: 0 20px 50px rgba(241, 100, 128, 0.15); /* Bóng đổ hồng cam */
+        position: relative;
+        overflow: hidden;
+    }
+
+        /* Thanh trang trí trên cùng */
+        .auth-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #f16480 100%);
+        }
+
+    /* === TIÊU ĐỀ === */
+    .auth-header {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .auth-title {
+        font-size: 34px;
+        font-weight: 800;
+        color: #f16480; /* MÀU HỒNG CAM CHỦ ĐẠO */
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .auth-subtitle {
+        color: #666;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    /* === HỆ THỐNG LƯỚI (GRID) === */
+    /* Đây là bí mật để form đẹp: Chia làm 2 cột đều nhau */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 30px; /* Khoảng cách cột */
+        row-gap: 24px; /* Khoảng cách hàng */
+    }
+
+    /* Ô nào muốn dài hết dòng (như Email) thì thêm class này */
+    .full-width {
+        grid-column: span 2;
+    }
+
+    /* === INPUT STYLES === */
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #444;
+        font-size: 13px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid #f0f0f0;
+        border-radius: 12px;
+        background: #fcfcfc;
+        font-size: 15px;
+        font-family: 'Quicksand', sans-serif;
+        color: #333;
+        outline: none;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+        /* Hiệu ứng khi bấm vào ô nhập */
+        .form-control-custom:focus {
+            border-color: #f16480;
+            background: white;
+            box-shadow: 0 4px 15px rgba(241, 100, 128, 0.1);
+        }
+
+    /* Tùy chỉnh mũi tên cho ô chọn Giới tính */
+    select.form-control-custom {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f16480' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 16px;
+        cursor: pointer;
+    }
+
+    /* === NÚT BẤM === */
+    .btn-submit {
+        grid-column: span 2; /* Nút dài hết dòng */
+        padding: 18px;
+        background: #f16480; /* Màu hồng cam yêu cầu */
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 10px 25px rgba(241, 100, 128, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 15px;
+    }
+
+        .btn-submit:hover {
+            background: #d64d6b; /* Đậm hơn khi di chuột */
+            transform: translateY(-3px); /* Nổi lên nhẹ */
+            box-shadow: 0 15px 30px rgba(241, 100, 128, 0.35);
+        }
+
+    /* === FOOTER === */
+    .auth-footer {
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 35px;
+        font-size: 15px;
+        color: #666;
+    }
+
+    .back-link {
+        color: #666;
+        text-decoration: none;
+        transition: 0.2s;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .back-link:hover {
+            color: #f16480;
+        }
+
+    .login-highlight {
+        color: #f16480;
+        font-weight: 800;
+        text-decoration: none;
+    }
+
+        .login-highlight:hover {
+            text-decoration: underline;
+        }
+
+    /* === RESPONSIVE MOBILE === */
+    @@media (max-width: 768px) {
+        .auth-card {
+            padding: 40px 20px;
+            width: 100%;
+        }
+        /* Chuyển grid thành 1 cột dọc trên điện thoại */
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .full-width, .btn-submit, .auth-footer {
+            grid-column: span 1;
+        }
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+
+        <!-- TIÊU ĐỀ -->
+        <div class="auth-header">
+            <h2 class="auth-title">Đăng Ký Tài Khoản</h2>
+            <p class="auth-subtitle">Điền thông tin bên dưới để gia nhập gia đình Catput! 🐾</p>
+        </div>
+
+        <form asp-action="Register" method="post">
+            <div class="form-grid">
+
+                <!-- HÀNG 1: HỌ - TÊN (Nằm 2 bên) -->
+                <div class="form-group">
+                    <label class="form-label">Họ *</label>
+                    <input name="LastName" class="form-control-custom" placeholder="Nguyễn" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tên *</label>
+                    <input name="FirstName" class="form-control-custom" placeholder="Văn A" required />
+                </div>
+
+                <!-- HÀNG 2: NGÀY SINH - GIỚI TÍNH (Nằm 2 bên) -->
+                <div class="form-group">
+                    <label class="form-label">Ngày sinh *</label>
+                    <input type="date" name="DateOfBirth" class="form-control-custom" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Giới tính *</label>
+                    <select name="Gender" class="form-control-custom">
+                        <option value="">-- Chọn --</option>
+                        <option value="Nu">Nữ</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Khac">Khác</option>
+                    </select>
+                </div>
+
+                <!-- HÀNG 3: EMAIL (Dài hết dòng) -->
+                <div class="form-group full-width">
+                    <label class="form-label">Địa chỉ Email *</label>
+                    <input asp-for="Email" type="email" class="form-control-custom" placeholder="name@example.com" required />
+                    <span asp-validation-for="Email" class="text-danger" style="font-size:12px; margin-top:5px; display:block;"></span>
+                </div>
+
+                <!-- HÀNG 4: MẬT KHẨU - NHẬP LẠI (Nằm 2 bên) -->
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu *</label>
+                    <input asp-for="Password" type="password" class="form-control-custom" placeholder="••••••••" required />
+                    <span asp-validation-for="Password" class="text-danger" style="font-size:12px; margin-top:5px; display:block;"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Xác nhận mật khẩu *</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control-custom" placeholder="••••••••" required />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger" style="font-size:12px; margin-top:5px; display:block;"></span>
+                </div>
+
+                <!-- NÚT ĐĂNG KÝ -->
+                <button type="submit" class="btn-submit">Tạo Tài Khoản</button>
+
+                <!-- CHÂN TRANG -->
+                <div class="auth-footer">
+                    <a href="@Url.Action("Index", "Shop")" class="back-link">
+                        ← Về Cửa Hàng
+                    </a>
+                    <span style="margin: 0 15px; color: #ddd;">|</span>
+                    <span>Đã có tài khoản? <a href="@Url.Action("Login", "Account")" class="login-highlight">Đăng nhập</a></span>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .cart-container {
@@ -26,7 +26,7 @@
             font-weight: 600;
             margin-bottom: 30px;
             text-align: center;
-            color: #ff6fa8;
+            color: #f16480;
         }
 
         .cart-grid {
@@ -76,12 +76,12 @@
             border-radius: 50%;
             cursor: pointer;
             transition: .2s;
-            color: #ff6fa8;
+            color: #f16480;
             font-size: 14px;
         }
 
             .remove-btn:hover {
-                background: #ff6fa8;
+                background: #f16480;
                 color: white;
             }
 
@@ -133,14 +133,14 @@
         .summary-total {
             font-size: 20px;
             font-weight: 700;
-            color: #ff6fa8;
+            color: #f16480;
         }
 
         .checkout-btn {
             margin-top: 18px;
             width: 100%;
             padding: 14px 0;
-            background: #ff6fa8;
+            background: #f16480;
             color: white;
             text-align: center;
             border-radius: 10px;
@@ -152,7 +152,7 @@
         }
 
             .checkout-btn:hover {
-                background: #ff84b6;
+                background: #f16480;
             }
 
         /* --- CSS CHO PHẦN MÃ ƯU ĐÃI (MỚI) --- */
@@ -205,7 +205,7 @@
             border: 2px solid #ffd1e6;
             padding: 10px 16px;
             border-radius: 10px;
-            color: #ff6fa8;
+            color: #f16480;
             font-weight: 600;
             cursor: pointer;
             transition: .2s;
@@ -289,7 +289,7 @@
             </table>
 
             <div class="cart-summary">
-                <h3 style="margin-bottom: 20px; font-size: 18px; color: #444; text-transform: uppercase;">Tổng cộng giỏ hàng</h3>
+                <h3 style="margin-bottom: 20px; font-size: 18px; color: #444; text-transform: uppercase; text-align: center;">Tổng cộng giỏ hàng</h3>
 
                 <div class="summary-row">
                     <span>Tạm tính</span>
@@ -319,7 +319,9 @@
         </div>
 
         <div style="margin-top:25px; text-align:center;">
-            <button class="btn-secondary">← TIẾP TỤC XEM SẢN PHẨM</button>
+            <a href="@Url.Action("Index", "Shop")" class="btn-secondary" style="text-decoration: none; display: inline-block;">
+                ← TIẾP TỤC XEM SẢN PHẨM
+            </a>
         </div>
 
     </div>
