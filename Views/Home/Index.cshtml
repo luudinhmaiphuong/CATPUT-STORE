@@ -3,6 +3,9 @@
     ViewData["Title"] = "Trang chủ - Catput";
 }
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <style>
     /* --- CSS CHO NÚT HERO --- */
     .hero-buttons {
@@ -52,7 +55,7 @@
 
     /* --- CSS DANH MỤC --- */
     .cate-section-wrapper {
-        padding: 40px 0;
+        padding: 20px 0;
         width: 100%;
     }
 
@@ -84,6 +87,43 @@
             margin: 0 auto;
         }
 
+    /* --- CSS SLIDER BỘ SƯU TẬP NỔI BẬT (ĐÃ CHỈNH KÍCH THƯỚC) --- */
+    .collection-slider-section {
+        padding: 40px 0;
+        background-color: white; /* ĐÃ CẬP NHẬT: Xóa màu nền hồng nhạt, chuyển sang nền trắng */
+    }
+
+    .collection-slide {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+        /* Hiệu ứng zoom nhẹ khi hover */
+        .collection-slide:hover {
+            box-shadow: 0 10px 20px rgba(241, 100, 128, 0.3);
+        }
+
+        .collection-slide img {
+            width: 100%;
+            height: 510px; /* ĐÃ CHỈNH: Chiều cao cố định theo kích thước banner 500px */
+            object-fit: cover;
+            display: block;
+        }
+
+    /* Tùy chỉnh nút điều hướng Swiper */
+    .swiper-button-next, .swiper-button-prev {
+        color: #FCA1B3;
+        top: 50%;
+        transform: translateY(-50%);
+        --swiper-navigation-size: 30px;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: #FCA1B3;
+    }
+
+
     /* Responsive mobile */
     @@media (max-width: 768px) {
         .cate-grid-container {
@@ -93,13 +133,17 @@
         .hero-buttons {
             justify-content: center;
         }
+        
+        .collection-slide img {
+            height: 250px; /* ĐÃ CHỈNH: Tăng chiều cao trên mobile lên 250px để cân đối */
+        }
     }
 </style>
 
-<div class="hero">
+<div class="hero bg-white">
     <div class="container hero-container flex flex-col md:flex-row items-center gap-8">
         <div class="hero-image w-full md:w-1/2">
-            <img src="~/images/banner.webp" alt="Hero Banner" />
+            <img src="~/images/Banner_Landing Page.webp" alt="Hero Banner" style="border-radius: 0px"/>
         </div>
 
         <div class="hero-text w-full md:w-1/2 text-center md:text-left space-y-4">
@@ -138,6 +182,97 @@
     </div>
 </div>
 
+<div class="collection-slider-section">
+    <div class="container">
+        <h2 class="text-2xl font-bold mb-6 text-center text-pink-600">
+            <i class="fas fa-heart" style="margin-right: 8px;"></i> CÁC BỘ SƯU TẬP ĐÁNG YÊU <i class="fas fa-heart" style="margin-left: 8px;"></i>
+        </h2>
+        
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <a href="@Url.Action("Index", "Shop", new { collection = "Len Mềm" })" class="collection-slide" title="Bộ sưu tập Len Mềm">
+                        <img src="~/images/banner.webp" alt="Bộ sưu tập Len Mềm" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="@Url.Action("Index", "Shop", new { collection = "Hạt Cườm" })" class="collection-slide" title="Bộ sưu tập Hạt Cườm">
+                        <img src="~/images/banner3.webp" alt="Bộ sưu tập Hạt Cườm" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="@Url.Action("Index", "Shop", new { collection = "Đất Màu" })" class="collection-slide" title="Bộ sưu tập Đất Màu">
+                        <img src="~/images/banner2.webp" alt="Bộ sưu tập Đất Màu" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="@Url.Action("Index", "Shop", new { collection = "Made 4 U" })" class="collection-slide" title="Bộ sưu tập Made 4 U">
+                        <img src="~/images/banner4.webp" alt="Bộ sưu tập Made 4 U" />
+                    </a>
+                </div>
+
+            </div>
+            <!-- Thêm nút điều hướng và phân trang -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Khởi tạo Swiper
+        const swiper = new Swiper('.mySwiper', {
+            // Cấu hình cơ bản
+            loop: true, // Lặp vô hạn
+            autoplay: {
+                delay: 5000, // Tự động chuyển sau 5 giây
+                disableOnInteraction: false,
+            },
+
+            // Phân trang (dấu chấm)
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            // Nút điều hướng (mũi tên)
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // ĐÃ SỬA: Chỉ hiển thị 1 slide duy nhất trên mọi kích thước màn hình
+            slidesPerView: 1, 
+            spaceBetween: 0, // Không cần khoảng cách khi chỉ hiển thị 1 slide
+            
+            // ĐÃ XÓA: Bỏ cấu hình breakpoints cũ để đảm bảo chỉ hiển thị 1 slide lớn
+            /*
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2, // 2 slides cho màn hình tablet
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3, // 3 slides cho màn hình desktop
+                    spaceBetween: 40,
+                },
+            },
+            */
+        });
+    });
+</script>
+
+
 <div class="section py-10">
     <div class="container">
         <h2 class="text-2xl font-bold mb-6">Sản phẩm nổi bật</h2>
@@ -145,7 +280,7 @@
             @foreach (var p in Model.FeaturedProducts)
             {
                 <div class="card p-2 rounded-lg hover:shadow-lg transition bg-white border border-gray-100">
-                    <img src="@Url.Content(p.Image)" alt="@p.Name" style="width:100%; height:200px; object-fit:cover; border-radius:8px;" />
+                    <img src="@Url.Content(p.Image)" alt="@p.Name" style="width:100%; height:250px; object-fit:cover; border-radius:8px;" />
                     <div style="padding: 10px;">
                         <h3 class="font-bold text-gray-800" style="margin: 5px 0;">@p.Name</h3>
                         <p class="text-pink-500 font-bold">@p.Price.ToString("N0") ₫</p>
@@ -163,7 +298,7 @@
             @foreach (var post in Model.BlogPosts)
             {
                 <div class="card p-4 rounded-lg shadow-md bg-white">
-                    <img src="@Url.Content(post.Image)" alt="@post.Title" style="width:100%; height:180px; object-fit:cover; border-radius:8px;" />
+                    <img src="@Url.Content(post.Image)" alt="@post.Title" style="width:100%; height:350px; object-fit:cover; border-radius:0px;" />
                     <h3 class="font-bold text-lg mt-2">@post.Title</h3>
                 </div>
             }
