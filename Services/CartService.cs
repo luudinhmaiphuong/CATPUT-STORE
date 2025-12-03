@@ -1,6 +1,6 @@
 ﻿using CatputStore.Models;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;                    // Đảm bảo có dòng này
+using Newtonsoft.Json;                   
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +14,7 @@ namespace CatputStore.Services
 
         public CartService(IHttpContextAccessor httpContextAccessor)
         {
-            _httpContextAccessor = httpContextAccessor; // Sửa đúng ở đây
+            _httpContextAccessor = httpContextAccessor; 
         }
 
         private List<CartItem> GetCartItems()

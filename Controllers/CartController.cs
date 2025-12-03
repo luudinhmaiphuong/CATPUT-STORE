@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CatputStore.Models;
 using CatputStore.Services;
-using Microsoft.AspNetCore.Antiforgery; // Thêm dòng này
+using Microsoft.AspNetCore.Antiforgery; 
 
 namespace CatputStore.Controllers
 {
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
-        private readonly IAntiforgery _antiforgery; // Để tạo token nếu cần
+        private readonly IAntiforgery _antiforgery; 
 
         public CartController(ICartService cartService, IAntiforgery antiforgery)
         {
@@ -31,12 +31,12 @@ namespace CatputStore.Controllers
             return View(model);
         }
 
-        // 3. THÊM VÀO GIỎ HÀNG – CHẠY 100% TỪ TRANG CHI TIẾT
+        // 3. THÊM VÀO GIỎ HÀNG 
         [HttpPost]
-        [ValidateAntiForgeryToken] // BẮT BUỘC PHẢI CÓ DÒNG NÀY!!!
+        [ValidateAntiForgeryToken] 
         public IActionResult Add(int productId, string productName, int price, string imageUrl, int quantity = 1)
         {
-            // Kiểm tra dữ liệu đầu vào cơ bản (tránh lỗi)
+            // Kiểm tra dữ liệu đầu vào cơ bản 
             if (productId <= 0 || string.IsNullOrEmpty(productName) || price < 0 || string.IsNullOrEmpty(imageUrl))
             {
                 return Json(new { success = false, message = "Dữ liệu không hợp lệ!" });

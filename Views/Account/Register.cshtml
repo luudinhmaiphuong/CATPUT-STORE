@@ -3,7 +3,7 @@
     ViewData["Title"] = "Đăng ký tài khoản";
 }
 
-<!-- 1. IMPORT FONT CHỮ TRÒN TRỊA (QUICKSAND) -->
+
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -14,18 +14,18 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background-color: #fff6fa; /* Nền hồng nhạt */
+        background-color: #fff6fa; 
         padding: 40px 20px;
     }
 
-    /* === KHUNG THẺ (CARD) === */
+    /* === KHUNG THẺ  === */
     .auth-card {
-        width: 900px; /* Độ rộng thoải mái */
+        width: 900px; 
         max-width: 100%;
         background: white;
         border-radius: 24px;
-        padding: 60px 80px; /* Padding lớn để nội dung lọt vào giữa sang trọng */
-        box-shadow: 0 20px 50px rgba(241, 100, 128, 0.15); /* Bóng đổ hồng cam */
+        padding: 60px 80px; 
+        box-shadow: 0 20px 50px rgba(241, 100, 128, 0.15); 
         position: relative;
         overflow: hidden;
     }
@@ -50,7 +50,7 @@
     .auth-title {
         font-size: 34px;
         font-weight: 800;
-        color: #f16480; /* MÀU HỒNG CAM CHỦ ĐẠO */
+        color: #f16480; 
         margin-bottom: 10px;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -62,16 +62,15 @@
         font-weight: 600;
     }
 
-    /* === HỆ THỐNG LƯỚI (GRID) === */
-    /* Đây là bí mật để form đẹp: Chia làm 2 cột đều nhau */
+    /* === GRID === */
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        column-gap: 30px; /* Khoảng cách cột */
-        row-gap: 24px; /* Khoảng cách hàng */
+        column-gap: 30px;
+        row-gap: 24px; 
     }
 
-    /* Ô nào muốn dài hết dòng (như Email) thì thêm class này */
+    
     .full-width {
         grid-column: span 2;
     }
@@ -124,9 +123,9 @@
 
     /* === NÚT BẤM === */
     .btn-submit {
-        grid-column: span 2; /* Nút dài hết dòng */
+        grid-column: span 2; 
         padding: 18px;
-        background: #f16480; /* Màu hồng cam yêu cầu */
+        background: #f16480; 
         color: white;
         border: none;
         border-radius: 12px;
@@ -141,8 +140,8 @@
     }
 
         .btn-submit:hover {
-            background: #d64d6b; /* Đậm hơn khi di chuột */
-            transform: translateY(-3px); /* Nổi lên nhẹ */
+            background: #d64d6b; 
+            transform: translateY(-3px); 
             box-shadow: 0 15px 30px rgba(241, 100, 128, 0.35);
         }
 
@@ -185,7 +184,7 @@
             padding: 40px 20px;
             width: 100%;
         }
-        /* Chuyển grid thành 1 cột dọc trên điện thoại */
+        
         .form-grid {
             grid-template-columns: 1fr;
             gap: 20px;
@@ -209,7 +208,7 @@
         <form asp-action="Register" method="post">
             <div class="form-grid">
 
-                <!-- HÀNG 1: HỌ - TÊN (Nằm 2 bên) -->
+                <!-- HÀNG 1: HỌ - TÊN  -->
                 <div class="form-group">
                     <label class="form-label">Họ *</label>
                     <input name="LastName" class="form-control-custom" placeholder="Nguyễn" required />
@@ -219,7 +218,7 @@
                     <input name="FirstName" class="form-control-custom" placeholder="Văn A" required />
                 </div>
 
-                <!-- HÀNG 2: NGÀY SINH - GIỚI TÍNH (Nằm 2 bên) -->
+                <!-- HÀNG 2: NGÀY SINH - GIỚI TÍNH  -->
                 <div class="form-group">
                     <label class="form-label">Ngày sinh *</label>
                     <input type="date" name="DateOfBirth" class="form-control-custom" required />
@@ -234,14 +233,14 @@
                     </select>
                 </div>
 
-                <!-- HÀNG 3: EMAIL (Dài hết dòng) -->
+                <!-- HÀNG 3: EMAIL  -->
                 <div class="form-group full-width">
                     <label class="form-label">Địa chỉ Email *</label>
                     <input asp-for="Email" type="email" class="form-control-custom" placeholder="name@example.com" required />
                     <span asp-validation-for="Email" class="text-danger" style="font-size:12px; margin-top:5px; display:block;"></span>
                 </div>
 
-                <!-- HÀNG 4: MẬT KHẨU - NHẬP LẠI (Nằm 2 bên) -->
+                <!-- HÀNG 4: MẬT KHẨU - NHẬP LẠI -->
                 <div class="form-group">
                     <label class="form-label">Mật khẩu *</label>
                     <input asp-for="Password" type="password" class="form-control-custom" placeholder="••••••••" required />

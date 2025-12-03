@@ -18,8 +18,6 @@ namespace CatputStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Code xử lý kiểm tra database ở đây
-                // Tạm thời giả lập thành công -> Về trang chủ
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
@@ -38,7 +36,6 @@ namespace CatputStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Code lưu user vào database ở đây
                 return RedirectToAction("Login");
             }
             return View(model);
